@@ -26,12 +26,14 @@ const serve = Bun.serve({
     },
   },
   fetch(req) {
-    return new Response("failed", { status: 400 });
+    return new Response("get data failed", {
+      status: 400,
+    });
   },
-  error(error){
-    console.error(error)
-    return new Response('Internal server: Something went wrong')
-  }
+  error(error) {
+    console.error(error);
+    return new Response("Internal server: Something went wrong");
+  },
 });
 
 console.log(`listening on http://localhost:${serve.port}`);

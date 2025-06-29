@@ -10,10 +10,14 @@ const pool = new Pool({
 const getData = async () => {
   try {
     const res = await pool.query("SELECT * FROM username");
-    return Response.json({
-      message: "succcess",
-      data: res.rows,
+
+    return new Response(JSON.stringify(res.rows), {
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+      },
     });
+
   } catch (error) {
     return Response.json({
       message: "failed",
@@ -33,9 +37,11 @@ const getDataById = async (req) => {
       });
     }
 
-    return Response.json({
-      message: "Data ditemukan",
-      data: res.rows,
+    return new Response(JSON.stringify(res.rows), {
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+      },
     });
   } catch (error) {
     return Response.json({
